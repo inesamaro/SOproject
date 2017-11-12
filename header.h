@@ -16,11 +16,11 @@
 #include <signal.h>
 
 typedef struct paciente {
-  char *nome;
+  char nome[50];
   int numTriagem;
   int numAtend;
   int prioridade;
-  clock_t inicio;
+  clock_t inicio; //para calcularmos qunato tempo e que cada paciente gastou desde que entrou no sistema atá que saiu
   clock_t fim;
 } Paciente;
 
