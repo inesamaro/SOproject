@@ -15,6 +15,7 @@
 #include <sys/wait.h>
 #include <signal.h>
 
+typedef struct paciente *Node_paciente;
 typedef struct paciente {
   char nome[50];
   int numTriagem;
@@ -22,6 +23,7 @@ typedef struct paciente {
   int prioridade;
   clock_t inicio; //para calcularmos qunato tempo e que cada paciente gastou desde que entrou no sistema atá que saiu
   clock_t fim;
+  Node_paciente next;
 } Paciente;
 
 typedef struct estat {
