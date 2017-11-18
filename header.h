@@ -15,6 +15,8 @@
 #include <sys/wait.h>
 #include <signal.h>
 
+#define PIPE_NAME "input_pipe"
+
 typedef struct paciente *Node_paciente;
 typedef struct paciente {
   char nome[50];

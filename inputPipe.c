@@ -1,6 +1,6 @@
 //#include "header.h"
 #define PIPE_NAME "input_pipe"
-
+//NAO SERVE PARA NADA
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
