@@ -1,9 +1,15 @@
 #include "header.h"
+#define PIPE_NAME "input_pipe"
 
 int main(int argc, char *argv[]) {
   Config *config;
   config = (struct config*)malloc(sizeof(config));
   int shmid;
+
+  //definir a variavel queuePacientes aqui ou no header?
+  //criar aqui a queue pacientes
+
+  //criar a messagequeue
 
   //argv[1] num de pacientes;
   signal(SIGINT, finalizar);
@@ -24,7 +30,7 @@ int main(int argc, char *argv[]) {
 	}
   sendPipe(fd, argv[1]);
   receivePipe(fd);
-  
+
   printf("Criação da memória partilhada.\n");
   shmid = criarMemPartilhada();
 
@@ -35,5 +41,6 @@ int main(int argc, char *argv[]) {
   printf("Criação dos processos doutor.\n");
   criarDoutores(&config);
 
+  //criamos aqui a função continuacaoTriagem() ?
 
 }

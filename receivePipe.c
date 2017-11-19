@@ -50,6 +50,7 @@ void main() {
 
   read(fd, array, 6);
 
+  Node_paciente p;
   p = (Node_paciente)malloc(sizeof(Paciente));
 
   p->nome = (char*)malloc(sizeof(50*sizeof(char)));
