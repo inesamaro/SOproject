@@ -1,14 +1,24 @@
 #include "header.h"
 
-void *triagem() {
-  //something
+void *triagem(Node_paciente queuePacientes) {
+  printf("entrou na triagem\n");
+  Node_paciente paciente;
   pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
   pthread_mutex_lock(&mutex);
-  //trabalho da thread
-  //chama a queuePacientes e retira o ultimo
-  //anda com a queue uma unidade para a frente
+  //elimina o primeiro paciente da queuePacientes
+  paciente = queuePacientes;
+  queuePacientes = queuePacientes->next;
+
+  //printa a queuePacientes para termos a certeza que ele foi emsmo eliminado.
+  Node_paciente aux = queuePacientes->next;
+  while(aux->next != NULL) {
+    printf("nome: %s\n", aux->nome);
+    aux = aux->next;
+  }
   pthread_mutex_unlock(&mutex);
-  pthread_exit(NULL);
+
+  sleep(paciente->tempoTriagem);
+  //MISSING chamada da função relativa á messagequeue que recebe este paciente
 
   pthread_mutex_lock(&mutex);
   (*shared_var).nTriados ++;

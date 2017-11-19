@@ -22,8 +22,9 @@
 typedef struct paciente *Node_paciente;
 typedef struct paciente {
   char *nome;
-  int numTriagem;
-  int numAtend;
+  int numChegada;
+  int tempoTriagem;
+  int tempoAtend;
   int prioridade;
   clock_t inicio; //para calcularmos qunato tempo e que cada paciente gastou desde que entrou no sistema atá que saiu
   clock_t fim;
@@ -35,22 +36,17 @@ Node_paciente criarQueuePacientes() {
   Node_paciente aux;
   aux = (Node_paciente)malloc(sizeof(Paciente));
   if (aux != NULL) {
-    aux->numTriagem = 0;
-    aux->numAtend = 0;
+    aux->nome = NULL;
+    aux->numChegada = 0;
+    aux->tempoTriagem = 0;
+    aux->tempoAtend = 0;
     aux->prioridade = 0;
     aux->inicio = 0;
     aux->fim = 0;
+    aux->next = NULL;
   }
+  printf("cria queuePacientes com sucesso!\n");
   return aux;
-}
-
-char* itoa(int val, int base){
-	static char buf[32] = {0};
-	int i = 30;
-
-	for(; val && i ; --i, val /= base)
-		buf[i] = "0123456789abcdef"[val % base];
-	return &buf[i+1];
 }
 
 int main(int argc, char *argv[]) {
@@ -65,51 +61,76 @@ int main(int argc, char *argv[]) {
     exit(0);
   }
 
-  char array[100][6];
-  char nomes[100][15] = {"Ines", "Filipa", "Ricardo", "José", "Maria", "António", "Luis", "Ana", "Adriana", "Mariana", "Carolina", "Bruno", "André", "Joana"};
-  int i;
-  for (i=0; i<3; i++) {
-    printf("A criar o primeiro array\n");
-    strcpy(&array[100][0], &nomes[100][rand()% 15]);
-    printf("array[0] %s", &array[100][0]);
+  FILE *fich = fopen("infoPacientes.txt", "r");
+  char linha[400], info[50];
+  int i, j;
+  //envia cada uma das linhas do ficheiro pelo pipe. LE TODAS AS LINHAS
+  while (fscanf(fich, " %[^\n]", linha) != EOF) {
+    write(fd, linha, 400);
+    printf("linha lida: %s\n", linha);
 
-    strcpy(&array[100][1], itoa(rand() % 50, 10));
-    printf("array[1] %s", &array[100][0]);
 
-    strcpy(&array[100][2], itoa(rand() % 50, 10));
-    printf("array[2] %s", &array[100][0]);
+    char line[400], c;
+    int count=0, valor;
+    int ind = 0;
+    Node_paciente queuePacientes = criarQueuePacientes();
+      read(fd, line, 400);
+      printf("leu uma linha!\n");
+      Node_paciente p;
+      p = (Node_paciente)malloc(sizeof(Paciente));
+      //nome
+      p->nome = (char*)malloc(sizeof(char)*50);
+      while ((c = line[ind]) != ' ') {
+        info[count] = c;
+        count ++;
+        ind ++;
+      }
+      strcpy(p->nome, info);
+      c = line[ind++];
+      count = 0;
+      printf("nome: %s\n", p->nome);
 
-    strcpy(&array[100][3], itoa(rand() % 3, 10));
-    printf("array[3] %s", &array[100][0]);
-    strcpy(&array[100][4], itoa(clock(), 10));
-    printf("array[4] %s", &array[100][0]);
-    strcpy(&array[100][5], itoa(0, 10));
-    printf("array[5] %s", &array[100][0]);
+      //tempoTriagem
+      while ((c = line[ind]) != ' ') {
+        info[count] = c;
+        count ++;
+        ind ++;
+      }
+      p->tempoTriagem = atoi(info);
+      c = line[ind++];
+      count =0;
+      printf("tempotriagem: %d\n", p->tempoTriagem);
 
-    printf("A mandar para o pipe\n");
-    write(fd, array, 6);
+      //tempoAtend
+      while ((c = line[ind]) != ' ') {
+        info[count] = c;
+        count ++;
+        ind ++;
+      }
+      printf("info %s\n", info);
+      p->tempoAtend = atoi(info);
+      c = line[ind++];
+      count =0;
+      printf("tempoAtend: %d\n", p->tempoAtend);
+
+      //prioridade
+      while ((c = line[ind]) != EOF) {
+        info[count] = c;
+        count ++;
+        ind ++;
+      }
+      p->prioridade = atoi(info);
+      count =0;
+      printf("prioridade: %d\n", p->prioridade);
+
+
+      printf("antes do while\n");
+      while (queuePacientes->next != NULL) {
+        queuePacientes = queuePacientes->next;
+      }
+      queuePacientes->next = p;
+      printf("nome na queue: %s\n", queuePacientes->next->nome);
+      p->next = NULL;
   }
-
-  Node_paciente queuePacientes = criarQueuePacientes();
-
-  read(fd, array, 6);
-  printf("leu array!");
-
-  Node_paciente p;
-  p = (Node_paciente)malloc(sizeof(Paciente));
-
-  p->nome = (char*)malloc(sizeof(50*sizeof(char)));
-  strcpy(p->nome, &array[100][0]);
-  p->numTriagem = array[100][1];
-  p->numAtend = array[100][2];
-  p->prioridade = array[100][3];
-  p->inicio = array[100][4];
-  p->fim = array[100][5];
-
-  while (queuePacientes->next != NULL) {
-    queuePacientes = queuePacientes->next;
-  }
-  queuePacientes->next = p;
-  p->next = NULL;
   printf("criou paciente!\n");
 }

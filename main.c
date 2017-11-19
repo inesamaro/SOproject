@@ -18,28 +18,29 @@ int main(int argc, char *argv[]) {
   lerFichConfig(&config);
 
   //criação do pipe
-  if (mkfifo(PIPE_NAME, O_CREAT|O_EXCL|0600) < 0) {
+  if ((mkfifo(PIPE_NAME, O_CREAT|O_EXCL|0600) < 0) & (errno!= EEXIST)) {
     perror("cannot open pipe!");
     exit(0);
   }
+  printf("criou o pipe\n");
 
   int fd;
 	if ((fd = open(PIPE_NAME, O_RDWR)) < 0) {
 		perror("Cannot open pipe for writing: ");
 		exit(0);
 	}
-  sendPipe(fd, argv[1]);
-  receivePipe(fd);
+
+  Node_paciente queuePacientes = sendReceivePipe(fd);
 
   printf("Criação da memória partilhada.\n");
   shmid = criarMemPartilhada();
 
   printf("Criação das threads triagem.\n");
-  criarTriagens(&config);
+  criarTriagens(&config, queuePacientes);
 
   //printf(" num doutores antes: %d\n", config->nDoutores);
-  printf("Criação dos processos doutor.\n");
-  criarDoutores(&config);
+  //printf("Criação dos processos doutor.\n");
+  //criarDoutores(&config);
 
   //criamos aqui a função continuacaoTriagem() ?
 

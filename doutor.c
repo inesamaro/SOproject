@@ -1,5 +1,6 @@
 #include "header.h"
 void doutor(Config *config/*, Estat *shared_var*/) {
+	pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 	clock_t inicio = clock();
 	clock_t fim = clock();
 	double tempoTurno = (double)(fim - inicio) / CLOCKS_PER_SEC;

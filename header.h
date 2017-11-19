@@ -14,14 +14,20 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <errno.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <ctype.h>
+
 
 #define PIPE_NAME "input_pipe"
 
 typedef struct paciente *Node_paciente;
 typedef struct paciente {
-  char nome[50];
-  int numTriagem;
-  int numAtend;
+  char *nome;
+  int numChegada;
+  int tempoTriagem;
+  int tempoAtend;
   int prioridade;
   clock_t inicio; //para calcularmos qunato tempo e que cada paciente gastou desde que entrou no sistema atá que saiu
   clock_t fim;
@@ -54,3 +60,5 @@ void doutor();
 void *triagem();
 void criarTriagens();
 int criarMemPartilhada();
+Node_paciente sendReceivePipe();
+Node_paciente criarQueuePacientes();
