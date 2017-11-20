@@ -2,7 +2,6 @@
 void criarTriagens(Config *config, Node_paciente queuePacientes, int mqid) {
   pthread_t vTriagens[config->nTriagens];
   int i;
-  int mqid;
   int idsTriagens[config->nTriagens];
   //cria o numero de triagens necessarias
   for (i=0; i<1/*config->nTriagens*/; i++) {

@@ -45,7 +45,6 @@ typedef struct estat {
 
 Estat *shared_var;
 int shmid;
-int mqid;
 
 typedef struct config {
   int nTriagens;
@@ -63,5 +62,8 @@ void *triagem();
 void criarTriagens();
 int criarMemPartilhada();
 int criarMQ();
+void putInMQ();
+void recieveFromMQ();
+
 Node_paciente sendReceivePipe();
 Node_paciente criarQueuePacientes();

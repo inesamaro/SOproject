@@ -2,7 +2,6 @@
 
 void *triagem(Node_paciente queuePacientes, int mqid) {
   printf("entrou na triagem\n");
-  int mqid;
   Node_paciente paciente;
   pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
   pthread_mutex_lock(&mutex);
@@ -20,7 +19,7 @@ void *triagem(Node_paciente queuePacientes, int mqid) {
 
   sleep(paciente->tempoTriagem);
   //chamada da função relativa á messagequeue que recebe este paciente
-  putInMQ(Node_paciente paciente, mqid);
+  putInMQ(paciente, mqid);
 
   pthread_mutex_lock(&mutex);
   (*shared_var).nTriados ++;
