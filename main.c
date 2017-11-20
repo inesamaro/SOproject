@@ -5,11 +5,13 @@ int main(int argc, char *argv[]) {
   Config *config;
   config = (struct config*)malloc(sizeof(config));
   int shmid;
+  int mqid;
 
   //definir a variavel queuePacientes aqui ou no header?
   //criar aqui a queue pacientes
 
   //criar a messagequeue
+  mqid = criarMQ();
 
   //argv[1] num de pacientes;
   signal(SIGINT, finalizar);
@@ -36,7 +38,7 @@ int main(int argc, char *argv[]) {
   shmid = criarMemPartilhada();
 
   printf("Criação das threads triagem.\n");
-  criarTriagens(&config, queuePacientes);
+  criarTriagens(&config, queuePacientes, mqid);
 
   //printf(" num doutores antes: %d\n", config->nDoutores);
   //printf("Criação dos processos doutor.\n");

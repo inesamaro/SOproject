@@ -1,7 +1,8 @@
 #include "header.h"
 
-void *triagem(Node_paciente queuePacientes) {
+void *triagem(Node_paciente queuePacientes, int mqid) {
   printf("entrou na triagem\n");
+  int mqid;
   Node_paciente paciente;
   pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
   pthread_mutex_lock(&mutex);
@@ -18,12 +19,14 @@ void *triagem(Node_paciente queuePacientes) {
   pthread_mutex_unlock(&mutex);
 
   sleep(paciente->tempoTriagem);
-  //MISSING chamada da função relativa á messagequeue que recebe este paciente
+  //chamada da função relativa á messagequeue que recebe este paciente
+  putInMQ(Node_paciente paciente, mqid);
 
   pthread_mutex_lock(&mutex);
   (*shared_var).nTriados ++;
   pthread_mutex_unlock(&mutex);
   //fazer sleep no tempo definido na estrutura paciente
   //chamar a função sendMessageQueue
+
   return NULL;
 }

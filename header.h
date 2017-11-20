@@ -24,6 +24,7 @@
 
 typedef struct paciente *Node_paciente;
 typedef struct paciente {
+  long msgtype;
   char *nome;
   int numChegada;
   int tempoTriagem;
@@ -44,6 +45,7 @@ typedef struct estat {
 
 Estat *shared_var;
 int shmid;
+int mqid;
 
 typedef struct config {
   int nTriagens;
@@ -60,5 +62,6 @@ void doutor();
 void *triagem();
 void criarTriagens();
 int criarMemPartilhada();
+int criarMQ();
 Node_paciente sendReceivePipe();
 Node_paciente criarQueuePacientes();
