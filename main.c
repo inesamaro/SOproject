@@ -12,6 +12,7 @@ int main(int argc, char *argv[]) {
 
   //criar a messagequeue
   mqid = criarMQ();
+  printf("a message queue foi criada com sucesso");
 
   //argv[1] num de pacientes;
   signal(SIGINT, finalizar);

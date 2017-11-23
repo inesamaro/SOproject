@@ -18,6 +18,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <ctype.h>
+#include <sys/msg.h>
 
 
 #define PIPE_NAME "input_pipe"
