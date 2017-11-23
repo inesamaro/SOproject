@@ -25,6 +25,7 @@ Node_paciente sendReceivePipe(int fd) {
       count ++;
       ind ++;
     }
+    info[count] = '\0';
     strcpy(p->nome, info);
     c = line[ind++];
     count = 0;
@@ -47,7 +48,6 @@ Node_paciente sendReceivePipe(int fd) {
       count ++;
       ind ++;
     }
-    printf("info %s\n", info);
     p->tempoAtend = atoi(info);
     c = line[ind++];
     count =0;
@@ -63,8 +63,6 @@ Node_paciente sendReceivePipe(int fd) {
     count =0;
     printf("prioridade: %d\n", p->prioridade);
 
-
-    printf("antes do while\n");
     Node_paciente aux = queuePacientes;
     while (aux->next != NULL) {
       aux = aux->next;

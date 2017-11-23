@@ -35,11 +35,11 @@ int main(int argc, char *argv[]) {
 
   Node_paciente queuePacientes = sendReceivePipe(fd);
 
-  printf("Criação da memória partilhada.\n");
-  shmid = criarMemPartilhada();
+  //printf("Criação da memória partilhada.\n");
+  //shmid = criarMemPartilhada();
 
   printf("Criação das threads triagem.\n");
-  criarTriagens(&config, queuePacientes, mqid);
+  criarTriagens(&config, &queuePacientes, mqid);
 
   //printf(" num doutores antes: %d\n", config->nDoutores);
   //printf("Criação dos processos doutor.\n");

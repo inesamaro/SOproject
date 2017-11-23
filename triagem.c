@@ -6,7 +6,9 @@ void *triagem(Node_paciente queuePacientes, int mqid) {
   pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
   pthread_mutex_lock(&mutex);
   //elimina o primeiro paciente da queuePacientes
+  printf("Paciente na queue: %s\n", queuePacientes->next->nome);
   paciente = queuePacientes->next;
+  printf("Paciente: %s\n", paciente->nome);
   queuePacientes->next = queuePacientes->next->next;
 
   //printa a queuePacientes para termos a certeza que ele foi emsmo eliminado.
