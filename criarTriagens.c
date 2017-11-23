@@ -4,7 +4,7 @@ void criarTriagens(Config *config, Node_paciente queuePacientes, int mqid) {
   int i;
   int idsTriagens[config->nTriagens];
   //cria o numero de triagens necessarias
-  for (i=0; i<1/*config->nTriagens*/; i++) {
+  for (i=0; i<2/*config->nTriagens*/; i++) {
     idsTriagens[i] = i;
     pthread_create(&vTriagens[i], NULL, triagem(queuePacientes, mqid), &idsTriagens[i]);
     printf("NOVA TRIAGEM\n");
