@@ -11,6 +11,7 @@ void doutor(Config *config/*, Estat *shared_var*/) {
 	 tempoTurno = (double)(fim - inicio) / CLOCKS_PER_SEC;
   }
 	
+
 	pthread_mutex_lock(&mutex);
   (*shared_var).nAtendidos ++; //nao está a incrementar bem a shared_var
 	pthread_mutex_unlock(&mutex);

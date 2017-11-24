@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
 
   //criar a messagequeue
   mqid = criarMQ();
-  printf("a message queue foi criada com sucesso");
+  printf("Criou a message queue\n");
 
   //argv[1] num de pacientes;
   signal(SIGINT, finalizar);
@@ -25,7 +25,7 @@ int main(int argc, char *argv[]) {
     perror("cannot open pipe!");
     exit(0);
   }
-  printf("criou o pipe\n");
+  printf("Criou o pipe\n");
 
   int fd;
 	if ((fd = open(PIPE_NAME, O_RDWR)) < 0) {
@@ -35,15 +35,14 @@ int main(int argc, char *argv[]) {
 
   Node_paciente queuePacientes = sendReceivePipe(fd);
 
-  //printf("Criação da memória partilhada.\n");
-  //shmid = criarMemPartilhada();
+  printf("Criação da memória partilhada.\n");
+  shmid = criarMemPartilhada();
 
   printf("Criação das threads triagem.\n");
-  criarTriagens(&config, &queuePacientes, mqid);
+  criarTriagens(&config, queuePacientes, mqid);
 
-  //printf(" num doutores antes: %d\n", config->nDoutores);
-  //printf("Criação dos processos doutor.\n");
-  //criarDoutores(&config);
+  printf("Criação dos processos doutor.\n");
+  criarDoutores(&config);
 
   //criamos aqui a função continuacaoTriagem() ?
 

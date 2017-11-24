@@ -1,5 +1,5 @@
 CC = gcc
-CFLAGS =	 -D_REENTRANT -Wall -g -pthread
+CFLAGS =	 -D_REENTRANT -Wall -g 
 all:	 main.o criarDoutores.o criarMemPartilhada.o criarTriagens.o doutor.o lerFichConfig.o triagem.o finalizar.o sendReceivePipe.o criarQueuePacientes.o criarMQ.o putInMQ.o recieveFromMQ.o header.h
 
 	$(CC)	$(CFLAGS)	-o	exe main.o criarDoutores.o criarMemPartilhada.o criarTriagens.o doutor.o lerFichConfig.o triagem.o finalizar.o sendReceivePipe.o criarQueuePacientes.o criarMQ.o putInMQ.o recieveFromMQ.o

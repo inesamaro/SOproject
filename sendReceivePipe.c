@@ -61,7 +61,7 @@ Node_paciente sendReceivePipe(int fd) {
     }
     p->prioridade = atoi(info);
     count =0;
-    printf("prioridade: %d\n", p->prioridade);
+    printf("prioridade: %ld\n", p->prioridade);
 
     Node_paciente aux = queuePacientes;
     while (aux->next != NULL) {
