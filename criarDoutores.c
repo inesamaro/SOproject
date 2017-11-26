@@ -1,12 +1,12 @@
 #include "header.h"
-void criarDoutores(Config *config/*, Estat *shared_var*/) {
+void criarDoutores(Config *config, int mqid) {
   int i, id;
 
 
   for (i=0; i<config->nDoutores; i++) {
     if (fork() == 0) {
       printf("[%d] INICIO DOUTOR\n", getpid());
-      doutor(config/*, shared_var*/); //por fazer
+      doutor(config, mqid); //por fazer
       printf("[%d] FIM DOUTOR\n", getpid());
       exit(0);
     }

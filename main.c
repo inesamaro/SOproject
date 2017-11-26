@@ -42,7 +42,7 @@ int main(int argc, char *argv[]) {
   criarTriagens(&config, queuePacientes, mqid);
 
   printf("Criação dos processos doutor.\n");
-  criarDoutores(&config);
+  criarDoutores(&config, mqid);
 
   //criamos aqui a função continuacaoTriagem() ?
 
