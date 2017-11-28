@@ -25,11 +25,11 @@
 
 typedef struct paciente *Node_paciente;
 typedef struct paciente {
-  char *nome;
+  long prioridade;
+  char nome[50];
   int numChegada;
   int tempoTriagem;
   int tempoAtend;
-  long prioridade;
   clock_t inicio; //para calcularmos qunato tempo e que cada paciente gastou desde que entrou no sistema atá que saiu
   clock_t fim;
   Node_paciente next;
@@ -43,15 +43,19 @@ typedef struct estat {
   int tempoMedioTotal;
 } Estat;
 
-Estat *shared_var;
-int shmid;
-
 typedef struct config {
   int nTriagens;
   int nDoutores;
   int tempoTurno;
   int queueMax;
 } Config;
+
+Estat *shared_var;
+Config *config;
+Node_paciente queuePacientes;
+int shmid;
+int mqid;
+
 
 int main(int argc, char *argv[]);
 void finalizar();

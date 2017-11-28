@@ -19,7 +19,6 @@ Node_paciente sendReceivePipe(int fd) {
     Node_paciente p;
     p = (Node_paciente)malloc(sizeof(Paciente));
     //nome
-    p->nome = (char*)malloc(sizeof(char)*50);
     while ((c = line[ind]) != ' ') {
       info[count] = c;
       count ++;

@@ -5,9 +5,7 @@ Node_paciente criarQueuePacientes() {
   Node_paciente aux;
   aux = (Node_paciente)malloc(sizeof(Paciente));
   if (aux != NULL) {
-    aux->nome = NULL;
-    printf("aqui\n");
-
+    strcpy(aux->nome, "");
     aux->numChegada = 0;
     aux->tempoTriagem = 0;
     aux->tempoAtend = 0;

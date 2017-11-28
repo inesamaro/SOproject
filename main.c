@@ -2,11 +2,7 @@
 #define PIPE_NAME "input_pipe"
 
 int main(int argc, char *argv[]) {
-  Config *config;
   config = (struct config*)malloc(sizeof(config));
-  int shmid;
-  int mqid;
-
   //definir a variavel queuePacientes aqui ou no header?
   //criar aqui a queue pacientes
 
@@ -33,7 +29,7 @@ int main(int argc, char *argv[]) {
 		exit(0);
 	}
 
-  Node_paciente queuePacientes = sendReceivePipe(fd);
+  queuePacientes = sendReceivePipe(fd);
 
   printf("Criação da memória partilhada.\n");
   shmid = criarMemPartilhada();
