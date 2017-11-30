@@ -65,7 +65,7 @@ void doutor();
 void *triagem();
 void criarTriagens();
 int criarMemPartilhada();
-int criarMQ();
+void criarMQ();
 void putInMQ();
 void recieveFromMQ();
 

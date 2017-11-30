@@ -1,6 +1,5 @@
 #include "header.h"
 int criarMemPartilhada() {
-  int shmid;
   if ((shmid = shmget(IPC_PRIVATE, sizeof(Estat), IPC_CREAT|0777)) > 0 ) {
 
     shared_var = shmat(shmid, NULL, 0);

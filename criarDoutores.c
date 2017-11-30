@@ -1,5 +1,5 @@
 #include "header.h"
-void criarDoutores(Config *config, int mqid) {
+void criarDoutores(Config *config) {
   int i, id;
 
 

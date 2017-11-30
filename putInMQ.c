@@ -1,10 +1,11 @@
 #include "header.h"
 
 //Por o paciente na message queue
-void putInMQ(Node_paciente paciente, int mqid){
+void putInMQ(Node_paciente paciente){
   int msgsend;
-  printf("ANtes do msgsnd\n");
-  if ((msgsend = msgsnd(mqid, paciente, sizeof(Paciente)-sizeof(long), 0)) == -1){
+  printf("Antes do msgsnd\n");
+  printf("nime: %s, %ld, %d, %d\n", paciente->nome, paciente->prioridade, paciente->tempoTriagem, paciente->tempoAtend);
+  if ((msgsend = msgsnd(mqid, &paciente, sizeof(Paciente)-sizeof(long), 0)) == -1){
     perror("Oh boy u got a error sending a msg to the messagequeue");
   }
   printf("o paciente ---> %s <--- entrou na mq\n", paciente->nome);
