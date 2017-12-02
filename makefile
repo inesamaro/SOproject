@@ -1,8 +1,8 @@
 CC = gcc
 CFLAGS =	 -D_REENTRANT -Wall -g -pthread
-all:	 main.o lerFichConfig.o namedPipe.o criarQueuePacientes.o criarMemPartilhada.o criarMQ.o criarTriagens.o triagem.o sendMQ.o
+all:	 main.o lerFichConfig.o namedPipe.o criarQueuePacientes.o criarMemPartilhada.o criarMQ.o criarTriagens.o triagem.o sendMQ.o criarDoutor.o
 
-	$(CC)	$(CFLAGS)	-o	exe main.o lerFichConfig.o namedPipe.o criarQueuePacientes.o criarMemPartilhada.o criarMQ.o criarTriagens.o triagem.o sendMQ.o
+	$(CC)	$(CFLAGS)	-o	exe main.o lerFichConfig.o namedPipe.o criarQueuePacientes.o criarMemPartilhada.o criarMQ.o criarTriagens.o triagem.o sendMQ.o criarDoutor.o
 main.o: main.c header.h
 	$(CC) $(CFLAGS) -c main.c
 #menu.o: menu.c header.h
@@ -30,6 +30,9 @@ triagem.o: triagem.c header.h
 
 sendMQ.o: sendMQ.c header.h
 	$(CC) $(CFLAGS) -c sendMQ.c
+
+criarDoutor.o: criarDoutor.c header.h
+	$(CC) $(CFLAGS) -c criarDoutor.c
 
 clean:
 	rm -rf *.o

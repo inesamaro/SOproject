@@ -23,8 +23,9 @@
 #define PIPE_NAME "input_pipe"
 
 typedef struct paciente *Node_paciente;
+
 typedef struct paciente {
-  long prioridade;
+  long int prioridade;
   char nome[50];
   int numChegada;
   int tempoTriagem;
@@ -67,4 +68,5 @@ void criarMemPartilhada();
 void criarMQ();
 void criarTriagens();
 void *triagem();
+//void criarDoutor();
 void sendMQ(Paciente *paciente);

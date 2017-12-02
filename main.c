@@ -2,6 +2,9 @@
 
 int main(int argc, char *argv[]){
 config = (Config*)malloc(sizeof(Config));
+
+  criarMemPartilhada();
+
   lerFichConfig();
 
   queuePacientes = criarQueuePacientes();
@@ -11,4 +14,6 @@ config = (Config*)malloc(sizeof(Config));
   criarMQ();
 
   criarTriagens();
+
+  //criarDoutor();
 }

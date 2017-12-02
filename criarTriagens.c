@@ -27,3 +27,4 @@ void criarTriagens() {
     pthread_join(vTriagens[i], NULL);
   }
 }
+ 
