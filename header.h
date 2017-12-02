@@ -25,7 +25,7 @@
 typedef struct paciente *Node_paciente;
 
 typedef struct paciente {
-  long int prioridade;
+  long int mtype;
   char nome[50];
   int numChegada;
   int tempoTriagem;
@@ -68,5 +68,6 @@ void criarMemPartilhada();
 void criarMQ();
 void criarTriagens();
 void *triagem();
-//void criarDoutor();
+void criarDoutor();
+void atendimento();
 void sendMQ(Paciente *paciente);

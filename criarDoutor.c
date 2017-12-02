@@ -1,20 +1,23 @@
 #include "header.h"
 
-void atendimento(){
-  Paciente* paciente;
+void atendimento() {
+  Paciente *paciente;
   printf("entrei no atendimento\n");
-  if (msgrcv(mqid, &paciente, sizeof(Paciente)-sizeof(long), 0, 0) == -1){
-		perror("Oh boy u got a error recieving a msg from the messagequeue");
-	}
-	printf("Paciente a ser tratado: %s, %ld \n",paciente->nome, paciente->prioridade);
-  shared_var->nAtendidos += 1; //nao está a incrementar bem a shared_var
+  if (msgrcv(mqid, &paciente, sizeof(paciente)-sizeof(long), -3, 0) == -1){
+	perror("Oh boy u got a error recieving a msg from the messagequeue");
+  }
 
-  printf("numero de pessoas atendidas: %d \n", (shared_var)->nAtendidos);
+  printf("prioridade no recv %ln\n", &paciente->mtype);
+  printf("mqid no recv %d\n", mqid);
+  printf("Paciente a ser tratado: %s, %ld \n",paciente->nome, paciente->mtype);
+  //shared_var->nAtendidos += 1; //nao está a incrementar bem a shared_var
+
+  //printf("numero de pessoas atendidas: %d \n", (shared_var)->nAtendidos);
 }
 
 void criarDoutor() {
   int i;
-  for (i=0; i<config->nDoutores; i++) {
+  for (i=0; i<5/*config->nDoutores*/; i++) {
     if (fork() == 0) {
       printf("[%d] INICIO DOUTOR\n", getpid());
       atendimento();//por fazer

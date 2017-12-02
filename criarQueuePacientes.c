@@ -9,7 +9,7 @@ Paciente* criarQueuePacientes() {
     aux->numChegada = 0;
     aux->tempoTriagem = 0;
     aux->tempoAtend = 0;
-    aux->prioridade = 0;
+    aux->mtype = 0;
     aux->inicio = 0;
     aux->inicioTriagem = 0;
     aux->inicioAtend = 0;

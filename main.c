@@ -15,5 +15,5 @@ config = (Config*)malloc(sizeof(Config));
 
   criarTriagens();
 
-  //criarDoutor();
+  criarDoutor();
 }

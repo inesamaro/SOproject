@@ -70,9 +70,9 @@ Paciente* namedPipe() {
       count ++;
       ind ++;
     }
-    p->prioridade = atoi(info);
+    p->mtype = atoi(info);
     count =0;
-    printf("prioridade: %ld\n", p->prioridade);
+    printf("prioridade: %ld\n", p->mtype);
 
     p->inicio = clock();
     p->inicioAtend = 0;
