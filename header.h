@@ -20,7 +20,6 @@
 #include <ctype.h>
 #include <sys/msg.h>
 
-
 #define PIPE_NAME "input_pipe"
 
 typedef struct paciente *Node_paciente;
@@ -31,7 +30,9 @@ typedef struct paciente {
   int tempoTriagem;
   int tempoAtend;
   clock_t inicio; //para calcularmos qunato tempo e que cada paciente gastou desde que entrou no sistema atá que saiu
-  clock_t fim;
+  clock_t inicioTriagem;;
+  clock_t inicioAtend;
+  clock_t fimAtend;
   Node_paciente next;
 } Paciente;
 
@@ -52,22 +53,18 @@ typedef struct config {
 
 Estat *shared_var;
 Config *config;
-Node_paciente queuePacientes;
+Paciente* queuePacientes;
+//vars for mq
 int shmid;
 int mqid;
+//vars for pipe
+int fdpipe;
 
-
-int main(int argc, char *argv[]);
-void finalizar();
 void lerFichConfig();
-void criarDoutores();
-void doutor();
-void *triagem();
-void criarTriagens();
-int criarMemPartilhada();
+Paciente* namedPipe();
+Paciente* criarQueuePacientes();
+void criarMemPartilhada();
 void criarMQ();
-void putInMQ();
-void recieveFromMQ();
-
-Node_paciente sendReceivePipe();
-Node_paciente criarQueuePacientes();
+void criarTriagens();
+void *triagem();
+void sendMQ(Paciente *paciente);

@@ -1,9 +1,9 @@
 #include "header.h"
 
-Node_paciente criarQueuePacientes() {
+Paciente* criarQueuePacientes() {
   //criar cabeçalho da lista de pacientes (queue)
-  Node_paciente aux;
-  aux = (Node_paciente)malloc(sizeof(Paciente));
+  Paciente* aux;
+  aux = (Paciente*)malloc(sizeof(Paciente));
   if (aux != NULL) {
     strcpy(aux->nome, "");
     aux->numChegada = 0;
@@ -11,7 +11,9 @@ Node_paciente criarQueuePacientes() {
     aux->tempoAtend = 0;
     aux->prioridade = 0;
     aux->inicio = 0;
-    aux->fim = 0;
+    aux->inicioTriagem = 0;
+    aux->inicioAtend = 0;
+    aux->fimAtend = 0;
     aux->next = NULL;
   }
   printf("cria queuePacientes com sucesso!\n");

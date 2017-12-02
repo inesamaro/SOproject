@@ -1,9 +1,8 @@
 #include "header.h"
-void lerFichConfig(Config *config) {
-
-  FILE *fich = fopen("config.txt", "r");
-  int count=0, len;
-  char linha[500], numero[400];
+void lerFichConfig(){
+  //FILE *fich = fopen("config.txt", "r");
+  int count=0;
+  //char linha[500], numero[400];
 
   /*while (fscanf(fich, " %[^=]", linha) != EOF) {
     fgetc(fich);
@@ -18,7 +17,7 @@ void lerFichConfig(Config *config) {
       config->nDoutores = 10;//atoi(numero);
     }
     else if (count == 2) {
-      config->tempoTurno = 155; //atoi(numero);
+      config->tempoTurno = 5; //atoi(numero);
     }
     else if (count == 3) {
       config->queueMax = 5; //atoi(numero);
