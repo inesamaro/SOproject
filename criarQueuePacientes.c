@@ -5,16 +5,26 @@ Paciente* criarQueuePacientes() {
   Paciente* aux;
   aux = (Paciente*)malloc(sizeof(Paciente));
   if (aux != NULL) {
-    strcpy(aux->nome, "");
-    aux->numChegada = 0;
-    aux->tempoTriagem = 0;
-    aux->tempoAtend = 0;
     aux->mtype = 0;
-    aux->inicio = 0;
-    aux->inicioTriagem = 0;
-    aux->inicioAtend = 0;
-    aux->fimAtend = 0;
-    aux->next = NULL;
+    printf("oi\n");
+    strcpy(aux->info.nome, "");
+    printf("oi\n");
+    aux->info.numChegada = 0;
+    printf("oi\n");
+    aux->info.tempoTriagem = 0;
+    printf("oi\n");
+    aux->info.tempoAtend = 0;
+    printf("oi\n");
+    aux->info.inicio = 0;
+    printf("oi\n");
+    aux->info.inicioTriagem = 0;
+    printf("oi\n");
+    aux->info.inicioAtend = 0;
+    printf("oi\n");
+    aux->info.fimAtend = 0;
+    printf("oi\n");
+    aux->info.next = NULL;
+    printf("oi\n");
   }
   printf("cria queuePacientes com sucesso!\n");
   return aux;

@@ -37,10 +37,10 @@ Paciente* namedPipe() {
       ind ++;
     }
     info[count] = '\0';
-    strcpy(p->nome, info);
+    strcpy(p->info.nome, info);
     c = line[ind++];
     count = 0;
-    printf("nome: %s\n", p->nome);
+    printf("nome: %s\n", p->info.nome);
 
     //tempoTriagem
     while ((c = line[ind]) != ' ') {
@@ -48,10 +48,10 @@ Paciente* namedPipe() {
       count ++;
       ind ++;
     }
-    p->tempoTriagem = atoi(info);
+    p->info.tempoTriagem = atoi(info);
     c = line[ind++];
     count =0;
-    printf("tempotriagem: %d\n", p->tempoTriagem);
+    printf("tempotriagem: %d\n", p->info.tempoTriagem);
 
     //tempoAtend
     while ((c = line[ind]) != ' ') {
@@ -59,10 +59,10 @@ Paciente* namedPipe() {
       count ++;
       ind ++;
     }
-    p->tempoAtend = atoi(info);
+    p->info.tempoAtend = atoi(info);
     c = line[ind++];
     count =0;
-    printf("tempoAtend: %d\n", p->tempoAtend);
+    printf("tempoAtend: %d\n", p->info.tempoAtend);
 
     //prioridade
     while ((c = line[ind]) != EOF) {
@@ -74,18 +74,18 @@ Paciente* namedPipe() {
     count =0;
     printf("prioridade: %ld\n", p->mtype);
 
-    p->inicio = clock();
-    p->inicioAtend = 0;
-    p->inicioTriagem = 0;
-    p->fimAtend = 0;
+    p->info.inicio = clock();
+    p->info.inicioAtend = 0;
+    p->info.inicioTriagem = 0;
+    p->info.fimAtend = 0;
 
     Node_paciente aux = queuePacientes;
-    while (aux->next != NULL) {
-      aux = aux->next;
+    while (aux->info.next != NULL) {
+      aux = aux->info.next;
     }
-    aux->next = p;
-    printf("nome na queue: %s\n", aux->next->nome);
-    p->next = NULL;
+    aux->info.next = p;
+    printf("nome na queue: %s\n", (aux->info.next)->info.nome);
+    p->info.next = NULL;
   }
   return queuePacientes;
 }

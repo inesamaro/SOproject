@@ -24,8 +24,7 @@
 
 typedef struct paciente *Node_paciente;
 
-typedef struct paciente {
-  long int mtype;
+typedef struct infoPaciente {
   char nome[50];
   int numChegada;
   int tempoTriagem;
@@ -35,6 +34,21 @@ typedef struct paciente {
   clock_t inicioAtend;
   clock_t fimAtend;
   Node_paciente next;
+} InfoPaciente;
+
+
+typedef struct paciente {
+  long int mtype;
+  InfoPaciente info;
+  /*char nome[50];
+  int numChegada;
+  int tempoTriagem;
+  int tempoAtend;
+  clock_t inicio; //para calcularmos qunato tempo e que cada paciente gastou desde que entrou no sistema atá que saiu
+  clock_t inicioTriagem;;
+  clock_t inicioAtend;
+  clock_t fimAtend;
+  Node_paciente next;*/
 } Paciente;
 
 typedef struct estat {
@@ -60,6 +74,8 @@ int shmid;
 int mqid;
 //vars for pipe
 int fdpipe;
+//sem_t semAtend;
+//sem_init(&semAtend, 0, 1);
 
 void lerFichConfig();
 Paciente* namedPipe();
@@ -70,4 +86,4 @@ void criarTriagens();
 void *triagem();
 void criarDoutor();
 void atendimento();
-void sendMQ(Paciente *paciente);
+void sendMQ(Paciente paciente);
