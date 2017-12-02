@@ -1,16 +1,13 @@
-/*#include "header.h"
+#include "header.h"
 
 void atendimento(){
-  pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
-  Paciente paciente;
+  Paciente* paciente;
   printf("entrei no atendimento\n");
-  if (msgrcv(mqid, &paciente, sizeof(Paciente), 0, 0) == -1){
+  if (msgrcv(mqid, &paciente, sizeof(Paciente)-sizeof(long), 0, 0) == -1){
 		perror("Oh boy u got a error recieving a msg from the messagequeue");
 	}
-	printf("Paciente a ser tratado: %s, %ld \n",paciente.nome, paciente.prioridade);
-  pthread_mutex_lock(&mutex);
+	printf("Paciente a ser tratado: %s, %ld \n",paciente->nome, paciente->prioridade);
   shared_var->nAtendidos += 1; //nao está a incrementar bem a shared_var
-	pthread_mutex_unlock(&mutex);
 
   printf("numero de pessoas atendidas: %d \n", (shared_var)->nAtendidos);
 }
@@ -25,8 +22,9 @@ void criarDoutor() {
       exit(0);
     }
   }
+}
 
-  while(1){ //sempre que um dos processos morre um novo é criado
+  /*while(1){ //sempre que um dos processos morre um novo é criado
     wait(NULL);
     if(!(id = fork())){
       printf("[%d] INICIO DOUTOR\n", getpid());
